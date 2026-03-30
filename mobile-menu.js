@@ -1,7 +1,6 @@
 (function () {
   var menu = document.querySelector(".mobile-menu");
-  var toggle = document.querySelector(".nav__catalog-btn");
-  if (!menu || !toggle) return;
+  if (!menu) return;
 
   var closeBtn = menu.querySelector(".mobile-menu__close");
   var backdrop = menu.querySelector(".mobile-menu__backdrop");
@@ -27,15 +26,41 @@
     }, 220);
   }
 
-  toggle.addEventListener("click", function (e) {
-    e.preventDefault();
-    openMenu();
-  });
+  function bindToggle(el) {
+    if (!el) return;
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      openMenu();
+    });
+  }
+
+  bindToggle(document.querySelector(".header-tools__menu"));
+  bindToggle(document.querySelector(".nav__catalog-btn"));
 
   if (closeBtn) closeBtn.addEventListener("click", closeMenu);
   if (backdrop) backdrop.addEventListener("click", closeMenu);
   links.forEach(function (link) {
-    link.addEventListener("click", closeMenu);
+    link.addEventListener("click", function (e) {
+      var href = link.getAttribute("href");
+      if (href && href.indexOf("#catalog-") === 0) {
+        e.preventDefault();
+        var id = href.slice(1);
+        var el = document.getElementById(id);
+        closeMenu();
+        setTimeout(function () {
+          if (typeof window.ismaCatalogReveal === "function" && el) {
+            window.ismaCatalogReveal(el);
+          } else if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+          if (window.history && window.history.pushState) {
+            window.history.pushState(null, "", href);
+          }
+        }, 0);
+        return;
+      }
+      closeMenu();
+    });
   });
 
   window.addEventListener("resize", function () {
