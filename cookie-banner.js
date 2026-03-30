@@ -50,6 +50,5 @@
       hideCookieBanner();
     });
     updateCookieBannerVisibility();
-    window.addEventListener("resize", updateCookieBannerVisibility);
   }
 })();
