@@ -743,8 +743,8 @@ button {
   .section-cats .cat-card {
     box-sizing: border-box;
     width: 100%;
-    max-width: 167.5px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     height: fit-content;
     border-radius: 0;
     overflow: visible;
@@ -950,8 +950,8 @@ button {
     justify-content: center;
     flex-shrink: 0;
     width: 100%;
-    max-width: 343px;
-    margin-inline: auto;
+    max-width: 100%;
+    margin-inline: 0;
     height: 48px;
     min-height: 48px;
     padding: 10px;
@@ -978,6 +978,12 @@ button {
 
 .section-products .container {
   min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .section-products .container {
+    padding-inline: 0;
+  }
 }
 
 .section-products__head {
@@ -1248,7 +1254,7 @@ button {
   .product-scroll .product-grid--popular .product-card {
     box-sizing: border-box;
     width: 100%;
-    max-width: 345px;
+    max-width: 100%;
     min-height: 0;
     border-radius: 8px;
     padding: 12px 12px 16px;
@@ -1927,6 +1933,34 @@ button {
   overflow-wrap: break-word;
 }
 
+@media (max-width: 768px) and (min-width: 561px) {
+  .footer-brand {
+    padding-left: 16px;
+    padding-right: 16px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-brand__contacts {
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .footer-pill,
+  .footer-pill--action {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+    padding: 10px 16px;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+}
+
 .footer-social {
   display: flex;
   gap: 12px;
@@ -2262,6 +2296,12 @@ button {
     width: auto;
     max-width: none;
     transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: 16px;
   }
 }
 
@@ -2851,23 +2891,35 @@ button {
   }
 
   .site-header .container {
-    padding-inline: 10px;
+    padding-inline: 16px;
   }
 
   main .container {
-    width: 343px;
-    max-width: calc(100% - 20px);
-    margin-inline: auto;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: 16px;
+  }
+
+  .section-products {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .section-products > .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     padding-inline: 0;
   }
 
   .site-footer {
-    width: 343px;
-    max-width: calc(100% - 20px);
+    width: auto;
+    max-width: 100%;
+    margin: 0 16px 16px;
     min-height: 0;
     padding-top: 24px;
     border-radius: 8px;
-    margin-bottom: 16px;
   }
 
   .site-footer .container {
@@ -2942,6 +2994,7 @@ button {
 
   .footer-pill {
     box-sizing: border-box;
+    display: block;
     align-self: stretch;
     width: 100%;
     max-width: 291px;
@@ -2949,17 +3002,17 @@ button {
     border-radius: 4px;
     padding-left: 16px;
     padding-right: 16px;
-    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 16px;
     font-weight: 300;
-    line-height: 1;
+    line-height: 1.2;
     color: #f0f0f0;
     background: rgba(0, 0, 0, 0.18);
-  }
-
-  .footer-pill:not(.footer-pill--action) {
-    height: 40px;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   .footer-pill--action {
@@ -2970,6 +3023,7 @@ button {
     height: auto;
     min-height: 40px;
     margin-bottom: 20px;
+    margin-inline: auto;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
