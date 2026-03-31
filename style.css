@@ -73,7 +73,7 @@ button {
 }
 
 .site-header {
-  background: var(--bg-card);
+  background: var(--bg-page);
   border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
@@ -1085,13 +1085,13 @@ button {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px) and (min-width: 769px) {
   .product-scroll {
     --cards-per-view: 2;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .product-scroll {
     --cards-per-view: 1;
   }
@@ -1249,6 +1249,55 @@ button {
   margin-bottom: 10px;
 }
 
+@media (min-width: 769px) {
+  /* Новинки / Популярные — десктопные отступы внутри карточки */
+  .product-card__img + .product-card__divider {
+    margin-bottom: 17px; /* полоса → Арт */
+  }
+
+  .product-card__sku {
+    margin-bottom: 17px; /* Арт → Наименование */
+  }
+
+  .product-card__name {
+    margin-bottom: 27px; /* Наименование → Цена (увеличено) */
+  }
+
+  .product-card__price {
+    margin-top: auto;    /* всё выше цены "отдаём" вверх, цена и ниже привязаны к низу */
+    margin-bottom: 19px; /* Цена → блок + / - и "В корзину" */
+  }
+
+  .product-card__row {
+    margin-bottom: 0;    /* сам блок без отступа вниз, ниже рисуем полосу */
+    flex-wrap: wrap;     /* позволяем линии уйти на следующую строку */
+  }
+
+  /* Тонкая серая полоса под блоком + / - и "В корзину" только на десктопе */
+  .product-card__row::after {
+    content: "";
+    display: block;
+    flex-basis: 100%;
+    width: 100%;
+    margin-top: 13px; /* расстояние 13px от блока до полосы */
+    margin-inline: 10px;
+    border-top: 0.5px solid #e5e5e5;
+  }
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 0;   /* убираем лишний "воздух" контейнера снизу на ПК */
+  }
+
+  /* Кнопка "Быстрый заказ": 13px от полосы, 21px до низа карточки */
+  .btn-quick {
+    margin-top: 13px;    /* полоса → кнопка */
+    margin-bottom: 21px; /* сразу весь отступ до края карточки */
+  }
+}
+
 @media (max-width: 768px) {
   .product-scroll .product-grid--novelties .product-card,
   .product-scroll .product-grid--popular .product-card {
@@ -1342,6 +1391,23 @@ button {
   border-radius: 999px;
   background: #fff;
   font-size: 14px;
+}
+
+/* Диапазон 768–561px: выравниваем масштаб qty и кнопки "В корзину" */
+@media (max-width: 768px) and (min-width: 561px) {
+  .product-card__row {
+    gap: 8px;
+  }
+
+  .qty {
+    flex: 1 1 0;
+    width: auto;
+    max-width: none;
+  }
+
+  .btn-cart {
+    flex: 1 1 0;
+  }
 }
 
 .qty button {
@@ -1846,7 +1912,7 @@ button {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .footer-grid {
     grid-template-columns: 1fr;
   }
@@ -2697,7 +2763,7 @@ button {
   }
 }
 
-@media (max-width: 900px) and (min-width: 881px) {
+@media (max-width: 900px) and (min-width: 769px) {
   .site-header__inner {
     flex-wrap: nowrap;
     gap: 10px;
@@ -2734,7 +2800,7 @@ button {
   }
 }
 
-@media (max-width: 880px) {
+@media (max-width: 768px) {
   .site-header__inner {
     min-height: 0;
     gap: 0;
@@ -2885,7 +2951,7 @@ button {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   body {
     overflow-x: hidden;
   }
@@ -3274,7 +3340,7 @@ body.mobile-menu-open::after {
   z-index: 300;
 }
 
-@media (min-width: 881px) {
+@media (min-width: 769px) {
   .mobile-menu {
     display: none;
   }
