@@ -35,7 +35,6 @@
   }
 
   bindToggle(document.querySelector(".header-tools__menu"));
-  bindToggle(document.querySelector(".nav__catalog-btn"));
 
   if (closeBtn) closeBtn.addEventListener("click", closeMenu);
   if (backdrop) backdrop.addEventListener("click", closeMenu);

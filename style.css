@@ -85,7 +85,7 @@ button {
   align-items: center;
   justify-content: flex-start;
   min-height: var(--header-h);
-  gap: 28px;
+  gap: 0;
 }
 
 .brand {
@@ -151,7 +151,7 @@ button {
   gap: 0;
   flex: 1;
   justify-content: flex-start;
-  margin-left: 150px; 
+  margin-left: 150px;
 }
 
 /* Расстояния между пунктами: Каталог—О компании 48px, далее по 24px */
@@ -184,23 +184,21 @@ button {
 }
 
 .nav__link--catalog {
-  gap: 12px;
+  gap: 14px;
+  padding-left: 0;
 }
 
 .nav__catalog-btn {
   width: 50px;
   height: 50px;
+  flex-shrink: 0;
   border-radius: 999px;
-  background: #3c3f41;
+  background: #444849;
   color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transform: translateY(-1px);
-}
-
-.nav__link--catalog .nav__catalog-btn {
-  display: none;
 }
 
 .nav__catalog-eq {
@@ -229,9 +227,22 @@ button {
   bottom: 0;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .nav {
     margin-left: 48px;
+  }
+}
+
+/* 1281–1400px: до компактной шапки (≤1280) ещё полный телефон в строке —
+   без этого бренд + nav + tools не помещались, корзина уезжала за overflow */
+@media (max-width: 1400px) and (min-width: 1281px) {
+  .brand {
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+
+  .header-tools__phone {
+    margin-right: 32px;
   }
 }
 
@@ -250,6 +261,8 @@ button {
   align-items: center;
   gap: 11px;
   font-size: 14px;
+  margin-left: 28px;
+  flex-shrink: 0;
 }
 
 .header-tools__phone {
@@ -310,8 +323,8 @@ button {
 }
 
 .header-tools__icon {
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
@@ -334,8 +347,10 @@ button {
 }
 
 .header-tools__pill {
-  height: 36px;
-  padding: 0 14px 0 12px;
+  /* Высота корзины под макет: в шапке 17px сверху и 16px снизу
+     при общей высоте хедера ~83px → таблетка ~50px */
+  height: 50px;
+  padding: 0 32px 0 29px;
   border-radius: 999px;
   background: #f1f1f1;
   border: 1px solid transparent;
@@ -409,7 +424,7 @@ button {
 .hero-main {
   background: #eeeeee;
   border-radius: var(--radius-xl);
-  padding: 0 24px 28px;
+  padding: 0 24px 42px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
   gap: 10px;
@@ -437,7 +452,10 @@ button {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding-top: 22px;
+  /* От серого фона до бейджа «Акция»: 42px сверху и 42px слева
+     (24px общий padding hero-main слева + 18px здесь) */
+  padding-top: 42px;
+  padding-left: 18px;
 }
 
 .hero-main__badge {
@@ -482,12 +500,14 @@ button {
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: calc(42px - 0.5 * (1.15 * 36px - 36px));
 }
 
 .hero-main__prices {
   display: grid;
-  gap: 4px;
+  gap: calc(
+    86px - (42px - 0.5 * (1.15 * 36px - 36px)) - 1.15 * 36px
+  );
 }
 
 .hero-main__old {
@@ -503,7 +523,7 @@ button {
 }
 
 .hero-main__price {
-  margin: 0;
+  margin: 5px 0 0;
   color: #444849;
   font-family: "Inter", var(--font);
   font-size: 36px;
@@ -512,8 +532,9 @@ button {
 }
 
 .hero-main__cta {
-  width: 58px;
-  height: 58px;
+  margin: 0;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: #4a5154;
   color: #fff;
@@ -556,15 +577,15 @@ button {
 
 .hero-main__nav {
   position: absolute;
-  right: 20px;
-  bottom: 18px;
+  right: 41px;
+  bottom: 42px;
   display: flex;
-  gap: 10px;
+  gap: 9px;
 }
 
 .hero-main__nav button {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: #ffffff;
   display: inline-flex;
@@ -577,7 +598,7 @@ button {
   width: 24px;
   height: 24px;
   stroke: #4a5154;
-  stroke-width: 1.8;
+  stroke-width: 2;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -605,7 +626,7 @@ button {
 .hero-card {
   background: var(--bg-card);
   border-radius: var(--radius-md);
-  padding: 20px 20px 18px;
+  padding: 28px 20px 18px 29px;
   box-shadow: var(--shadow-soft);
   flex: 1 0 289px;
   display: flex;
@@ -1649,8 +1670,9 @@ button {
 
 .section-faq__title {
   margin: 0 0 12px;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 30px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0;
   color: #444849;
@@ -1660,11 +1682,11 @@ button {
   margin: 0;
   max-width: 42em;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 300;
-  line-height: 1.4;
+  line-height: calc(26 / 18);
   letter-spacing: 0;
-  color: #444849;
+  color: #3a383f;
 }
 
 .faq-grid {
@@ -1736,7 +1758,7 @@ button {
 
   .faq-item__q {
     line-height: calc(24 / 18);
-    padding: 14px 16px;
+    padding: 14px 16px 14px 24px;
   }
 
   .faq-item__icon {
@@ -1746,8 +1768,8 @@ button {
   .faq-item__a-inner {
     font-size: 16px;
     line-height: calc(22 / 16);
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
     padding-bottom: 0;
   }
 
@@ -1762,7 +1784,11 @@ button {
   overflow: hidden;
   border: 1px solid #dfdfdf;
   box-sizing: border-box;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.faq-item--open {
+  background: #ffffff;
 }
 
 @media (hover: hover) {
@@ -1782,15 +1808,14 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 16px 18px;
+  padding: 16px 24px;
   text-align: left;
-  font-family: "Myriad Pro", "Myriad Web", "Source Sans 3", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 18px;
-  font-weight: 400; 
+  font-weight: 300;
   line-height: calc(24 / 18);
   letter-spacing: 0;
-  color: #1d1a23;
+  color: #3b3940;
   /* Системное кольцо фокуса не показываем — акцент на рамке .faq-item (hover / :focus-visible) */
   outline: none;
 }
@@ -1802,7 +1827,7 @@ button {
   width: 1.1em;
   height: 1.1em;
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1;
   flex-shrink: 0;
   color: inherit;
@@ -1824,8 +1849,7 @@ button {
   overflow: hidden;
   min-height: 0;
   transition: grid-template-rows 0.5s ease-out;
-  font-family: "Myriad Pro", "Myriad Web", "Source Sans 3", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 .faq-item--open .faq-item__a {
@@ -1835,14 +1859,15 @@ button {
 .faq-item__a-inner {
   overflow: hidden;
   min-height: 0;
-  padding: 0 18px;
+  padding: 0 24px;
   padding-bottom: 0;
   transition: padding-bottom 0.5s ease-out;
+  font-family: inherit;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: calc(22 / 16);
   letter-spacing: 0;
-  color: #6f7373;
+  color: #828686;
 }
 
 .faq-item--open .faq-item__a-inner {
@@ -1876,26 +1901,42 @@ button {
 }
 
 .site-footer__head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
   padding-left: 44px;
-  padding-right: 44px;
-  margin-bottom: 27px;
-  position: relative;
+  padding-right: 43px;
+  /* Отступ после полосы до трёх колонок — задан в .footer-grid { padding-top } */
+  margin-bottom: 0;
 }
 
-.site-footer__head::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: calc(100% + 27px);
-  width: 1740px;
-  max-width: calc(100% - 24px);
-  transform: translateX(-50%);
+/* Линия = ширина ряда «лого — Наверх»: начинается с лого, заканчивается у правого края ссылки «Наверх» */
+.site-footer__head-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.site-footer__head-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* В шапке сайта у .logo стоит padding-block: 17px — в футере убираем, чтобы 32px до лого и ровная строка с «Наверх» */
+.site-footer__head-top .logo {
+  padding-block: 0;
+  align-self: center;
+}
+
+.site-footer__head-line {
+  margin-top: 27px;
+  width: 100%;
   border-top: 1px solid rgba(223, 223, 223, 0.28);
-  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.site-footer__head-top .footer-to-top {
+  align-self: center;
 }
 
 .site-footer a:hover {
@@ -2180,11 +2221,12 @@ button {
 .footer-bottom::before {
   content: "";
   position: absolute;
-  left: 50%;
+  left: 44px;
+  right: 43px;
   top: 0;
-  width: 1740px;
-  max-width: calc(100% - 24px);
-  transform: translateX(-50%);
+  width: auto;
+  max-width: none;
+  transform: none;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
   pointer-events: none;
 }
@@ -2265,10 +2307,10 @@ button {
   display: flex;
   flex-direction: column;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: #444849;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
   box-shadow: none;
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
   z-index: 220;
   opacity: 0;
   transform: translateY(10px);
@@ -2300,7 +2342,7 @@ button {
   height: 62px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.18);
+  background: #f0f0f0;
   z-index: 0;
 }
 
@@ -2319,7 +2361,7 @@ button {
   margin: 15px 0 0;
   width: 100%;
   padding-inline: 0;
-  color: rgba(255, 255, 255, 0.9);
+  color: #444849;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -2401,14 +2443,6 @@ button {
     max-width: calc(100% - 24px);
   }
 
-  .site-footer__head::after,
-  .footer-bottom::before {
-    left: 12px;
-    right: 12px;
-    width: auto;
-    max-width: none;
-    transform: none;
-  }
 }
 
 @media (max-width: 768px) {
@@ -2460,6 +2494,8 @@ button {
     gap: 0;
     padding-bottom: 0;
     white-space: nowrap;
+    /* Иначе пункты с flex-shrink:0 рисуются поверх бренда и .header-tools */
+    overflow-x: hidden;
   }
 
   .nav__link {
@@ -2470,13 +2506,18 @@ button {
     white-space: nowrap;
   }
 
+  .nav__link--catalog {
+    padding-left: 0;
+  }
+
   .header-tools__phone {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    /* Как у .header-tools__icon (50px), не меньше лупы */
+    width: 50px;
+    height: 50px;
     padding: 0;
     margin-right: 0;
     border-radius: 50%;
@@ -2498,13 +2539,6 @@ button {
 
   .header-tools__phone-icon svg.header-tools__phone-svg--desktop {
     display: none;
-  }
-
-  .header-tools__phone-icon img.header-tools__phone-img--mobile {
-    display: block;
-    width: 13.75px;
-    height: 13.75px;
-    object-fit: contain;
   }
 
   .header-tools__phone-text {
@@ -2530,6 +2564,13 @@ button {
     object-fit: contain;
   }
 
+  .header-tools__phone-icon img.header-tools__phone-img--mobile {
+    display: block;
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
   }
@@ -2541,6 +2582,49 @@ button {
 
   .hero-main {
     min-height: auto;
+  }
+}
+
+/* 901–1100px: узкий ряд — подпись бренда и широкие отступы nav давали налезание
+   кружка «Каталог» на текст и трубки на «Контакты» */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .brand__sub,
+  .brand__divider {
+    display: none;
+  }
+
+  .brand {
+    flex-shrink: 0;
+  }
+
+  .nav__link:nth-child(2) {
+    margin-left: 28px;
+  }
+
+  .nav__link:nth-child(3),
+  .nav__link:nth-child(4) {
+    margin-left: 12px;
+  }
+
+  .nav__catalog-btn {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 1101px) {
+  .nav__link:nth-child(2) {
+    margin-left: 36px;
+  }
+
+  .nav__link:nth-child(3),
+  .nav__link:nth-child(4) {
+    margin-left: 16px;
+  }
+
+  .nav__catalog-btn {
+    width: 46px;
+    height: 46px;
   }
 }
 
@@ -2565,7 +2649,7 @@ button {
   }
 
   .header-tools__pill {
-    padding: 0 12px 0 10px;
+    padding: 0 30px 0 27px;
     gap: 8px;
     font-size: 15px;
   }
@@ -2577,6 +2661,20 @@ button {
 
   .header-tools__icon {
     width: 34px;
+  }
+
+  .header-tools__phone {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Эксперимент: без кружка у «Каталог» на узких ширинах */
+  .nav__catalog-btn {
+    display: none;
+  }
+
+  .nav__link--catalog {
+    gap: 0;
   }
 
   .hero-side {
@@ -2610,8 +2708,8 @@ button {
   }
 
   .hero-main__nav {
-    right: 14px;
-    bottom: 14px;
+    right: 41px;
+    bottom: 42px;
   }
 }
 
@@ -2724,8 +2822,8 @@ button {
   }
 
   .hero-main__cta svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
 
   .hero-main__nav {
@@ -2812,23 +2910,51 @@ button {
 @media (max-width: 900px) and (min-width: 769px) {
   .site-header__inner {
     flex-wrap: nowrap;
-    gap: 10px;
+    gap: 12px;
+    align-items: center;
   }
 
   .brand {
     flex: 0 0 auto;
   }
 
+  /* Узкая колонка: центрирование + overflow обрезали края — кружок «Каталог»
+     казался «за» лого, трубка накрывала «Контакты». Скролл вместо обрезки. */
   .nav {
     flex: 1 1 auto;
     min-width: 0;
     margin-left: 0;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     align-items: center;
     gap: 0;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     white-space: nowrap;
+    /* Зазор между последним пунктом и колонкой с трубкой (иначе круг 40px накрывал «Контакты») */
+    padding-inline-end: 16px;
+    scroll-padding-inline-end: 16px;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav__link:nth-child(2) {
+    margin-left: 20px;
+  }
+
+  .nav__link:nth-child(3),
+  .nav__link:nth-child(4) {
+    margin-left: 10px;
+  }
+
+  .nav__catalog-btn {
+    width: 40px;
+    height: 40px;
   }
 
   .nav__link {
@@ -2839,6 +2965,7 @@ button {
   .header-tools {
     flex: 0 0 auto;
     margin-left: 0;
+    flex-shrink: 0;
   }
 
   .nav .nav__link:not(.nav__link--catalog) {
@@ -2911,10 +3038,17 @@ button {
     display: none;
   }
 
+  .header-tools__icon img.header-tools__icon-img--mobile {
+    display: block;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
   .header-tools__phone-icon img.header-tools__phone-img--mobile {
     display: block;
-    width: 13.75px;
-    height: 13.75px;
+    width: 13px;
+    height: 13px;
     object-fit: contain;
   }
 
@@ -3046,7 +3180,7 @@ button {
   .site-footer__head {
     padding-left: 16px;
     padding-right: 16px;
-    margin-bottom: 22px;
+    margin-bottom: 0;
   }
 
   .footer-to-top {
@@ -3058,8 +3192,8 @@ button {
     color: #f0f0f0;
   }
 
-  .site-footer__head::after {
-    top: calc(100% + 16px);
+  .site-footer__head-line {
+    margin-top: 16px;
   }
 
   .site-footer__head,
@@ -3067,6 +3201,10 @@ button {
   .footer-bottom {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .site-footer__head {
+    padding-right: 43px;
   }
 
   .footer-grid {
