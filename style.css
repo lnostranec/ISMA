@@ -500,14 +500,12 @@ button {
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: calc(42px - 0.5 * (1.15 * 36px - 36px));
+  gap: 28px;
 }
 
 .hero-main__prices {
   display: grid;
-  gap: calc(
-    86px - (42px - 0.5 * (1.15 * 36px - 36px)) - 1.15 * 36px
-  );
+  gap: 4px;
 }
 
 .hero-main__old {
@@ -528,7 +526,7 @@ button {
   font-family: "Inter", var(--font);
   font-size: 36px;
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.05;
 }
 
 .hero-main__cta {
