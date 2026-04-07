@@ -108,7 +108,7 @@ button {
 .brand__sub {
   font-family: "Inter", var(--font);
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.15;
   color: #8a8a8a;
   display: grid;
@@ -175,7 +175,7 @@ button {
   flex-shrink: 0;
   font-family: "Inter", var(--font);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 32px;
   color: #212121;
   padding: 6px 2px;
@@ -188,10 +188,19 @@ button {
   padding-left: 0;
 }
 
+.nav__catalog-text {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
 .nav__catalog-btn {
   width: 50px;
   height: 50px;
   flex-shrink: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
   border-radius: 999px;
   background: #444849;
   color: #fff;
@@ -199,6 +208,13 @@ button {
   align-items: center;
   justify-content: center;
   transform: translateY(-1px);
+  cursor: pointer;
+  font: inherit;
+}
+
+.nav__catalog-btn:focus-visible {
+  outline: 2px solid var(--accent-hot);
+  outline-offset: 2px;
 }
 
 .nav__catalog-eq {
@@ -225,6 +241,255 @@ button {
 
 .nav__catalog-eq::after {
   bottom: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Мега-меню каталога (ПК, кнопка «Каталог» с 901px) */
+.catalog-mega[hidden] {
+  display: none !important;
+}
+
+.catalog-mega {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--header-h);
+  bottom: 0;
+  z-index: 150;
+  pointer-events: none;
+}
+
+.catalog-mega:not([hidden]) {
+  pointer-events: none;
+}
+
+.catalog-mega__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+.catalog-mega__sheet-wrap {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (min-width: 901px) {
+  .catalog-mega .container.catalog-mega__sheet-wrap {
+    max-width: 1822px;
+  }
+}
+
+.catalog-mega__sheet {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+  overflow: hidden;
+  background: #f8f8f8;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  border-radius: 0 0 16px 16px;
+}
+
+.catalog-mega__inner {
+  padding: 0;
+}
+
+.catalog-mega__layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.26fr) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: min(560px, calc(100vh - var(--header-h) - 48px));
+}
+
+@media (min-width: 901px) {
+  .catalog-mega__layout {
+    grid-template-columns: 435px minmax(0, 1387px);
+    min-height: min(634px, calc(100vh - var(--header-h) - 24px));
+  }
+}
+
+@media (max-width: 1821px) and (min-width: 901px) {
+  .catalog-mega__layout {
+    /* Обе части сжимаются пропорционально, чтобы правые колонки не наезжали */
+    grid-template-columns: clamp(300px, 23.9vw, 435px) minmax(0, 1fr);
+  }
+
+  .catalog-mega__main {
+    padding: 22px clamp(4px, 0.6vw, 8px) 32px clamp(14px, 1.6vw, 32px);
+  }
+
+  .catalog-mega__cols {
+    gap: 20px clamp(10px, 1.4vw, 32px);
+  }
+
+  .catalog-mega__sub a {
+    font-size: clamp(12px, 0.8vw, 16px);
+    min-height: clamp(38px, 2.55vw, 49px);
+    line-height: clamp(38px, 2.55vw, 49px);
+    padding-left: clamp(16px, 2.1vw, 38px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .catalog-mega__primary a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.catalog-mega__sidebar {
+  background: #ffffff;
+  border-right: 1px solid #e1e1e1;
+  padding: 22px 0 28px;
+}
+
+.catalog-mega__primary {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.catalog-mega__primary li {
+  margin: 0;
+  padding: 0;
+}
+
+.catalog-mega__primary a {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  margin-inline: 24px;
+  min-height: 49px;
+  padding: 0 36px 0 15px;
+  font-family: "Inter", var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 49px;
+  color: #212121;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.catalog-mega__primary a::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 10px;
+  background: url("assets/MenuForm/triangle.svg") center / contain no-repeat;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.catalog-mega__primary li:first-child a {
+  color: var(--accent-hot);
+  background: #eeeeee;
+}
+
+.catalog-mega__primary li:first-child a::after {
+  opacity: 1;
+}
+
+.catalog-mega__primary:hover li:first-child:not(:hover) a {
+  color: #212121;
+  background: transparent;
+}
+
+.catalog-mega__primary:hover li:first-child:not(:hover) a::after {
+  opacity: 0;
+}
+
+.catalog-mega__primary a:hover,
+.catalog-mega__primary a:focus-visible {
+  color: var(--accent-hot);
+  background: #eeeeee;
+}
+
+.catalog-mega__primary a:hover::after,
+.catalog-mega__primary a:focus-visible::after {
+  opacity: 1;
+}
+
+.catalog-mega__main {
+  background: #ffffff;
+  padding: 22px 8px 32px 32px;
+}
+
+.catalog-mega__cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 32px;
+  align-items: start;
+}
+
+.catalog-mega__col {
+  min-width: 0;
+}
+
+.catalog-mega__sub {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.catalog-mega__sub li {
+  margin: 0;
+}
+
+.catalog-mega__sub a {
+  display: block;
+  box-sizing: border-box;
+  min-height: 49px;
+  line-height: 49px;
+  padding: 0 8px 0 38px;
+  font-family: "Inter", var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  color: #333333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.catalog-mega__sub a:hover,
+.catalog-mega__sub a:focus-visible {
+  color: var(--accent-hot);
+}
+
+body.catalog-mega-open {
+  overflow: visible;
+}
+
+@media (max-width: 900px) {
+  .catalog-mega {
+    display: none !important;
+  }
+
+  body.catalog-mega-open {
+    overflow: visible;
+  }
 }
 
 @media (max-width: 1400px) {
@@ -256,6 +521,10 @@ button {
 .nav__link:hover {
   color: var(--accent-red);
 }
+
+.nav__link--catalog:hover .nav__catalog-text {
+  color: var(--accent-red);
+}
 .header-tools {
   display: flex;
   align-items: center;
@@ -269,7 +538,7 @@ button {
   white-space: nowrap;
   font-family: "Inter", var(--font);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 32px;
   color: #212121;
   
@@ -360,7 +629,7 @@ button {
   color: #2f2f2f;
   font-family: "Inter", var(--font);
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 32px;
   transition: background 0.3s, border-color 0.3s, color 0.3s;
 }
@@ -395,7 +664,7 @@ button {
 .header-tools__pill-badge {
   font-family: "Inter", var(--font);
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   color: var(--accent-hot);
   margin-left: 15px;
@@ -473,7 +742,7 @@ button {
   color: #212121;
   font-family: "Inter", var(--font);
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 18px;
   margin-bottom: 28px;
 }
@@ -492,7 +761,7 @@ button {
   color: #686c6d;
   font-family: "Inter", var(--font);
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 28px;
 }
 
@@ -512,7 +781,7 @@ button {
   color: #6f7374;
   font-family: "Inter", var(--font);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.2;
   text-decoration-line: line-through;
   text-decoration-thickness: 1px;
@@ -669,7 +938,7 @@ button {
 .hero-card__footer .hero-card__link {
   font-family: "Inter", var(--font);
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 24px;
   color: #686c6d;
   text-decoration: none;
@@ -682,7 +951,7 @@ button {
 .hero-card__ext {
   font-family: "Inter", var(--font);
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 24px;
   color: #686c6d;
 }
@@ -729,7 +998,7 @@ button {
   margin: 0;
   font-family: "Inter", var(--font);
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 24px;
   color: #686c6d;
 }
@@ -823,7 +1092,7 @@ button {
     margin-top: 8px;
     padding: 0;
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.25;
     color: #444849;
     background: transparent;
@@ -911,7 +1180,7 @@ button {
 .cat-card__label {
   font-family: "Inter", var(--font);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 26px;
   letter-spacing: 0;
   color: #444849;
@@ -992,7 +1261,7 @@ button {
     background: #eeefef;
     font-family: "Inter", var(--font);
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1;
     letter-spacing: 0;
     color: #444849;
@@ -1080,6 +1349,8 @@ button {
   scrollbar-width: none;
   -ms-overflow-style: none;
   overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: auto;
 }
 
 .product-scroll::-webkit-scrollbar {
@@ -1094,6 +1365,7 @@ button {
   .product-scroll.is-drag-scroll {
     cursor: grabbing;
     user-select: none;
+    scroll-snap-type: none;
   }
 }
 
@@ -1114,6 +1386,8 @@ button {
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 @media (max-width: 1620px) {
@@ -1261,7 +1535,7 @@ button {
 .product-card__name {
   font-family: "Inter", var(--font);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 21px;
   letter-spacing: 0;
   color: #000000;
@@ -1275,7 +1549,7 @@ button {
 .product-card__sku {
   font-family: "Inter", var(--font);
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: normal;
   letter-spacing: 0;
   color: #6f7373;
@@ -1385,7 +1659,7 @@ button {
   .product-card__sku {
     margin-bottom: 8px;
     font-family: "Inter", var(--font);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
     line-height: 1;
     color: #686c6d;
@@ -1394,7 +1668,7 @@ button {
   .product-card__name {
     margin-bottom: 16px;
     font-family: "Inter", var(--font);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 16px;
     line-height: 1.4;
     color: #444849;
@@ -1407,7 +1681,7 @@ button {
   .btn-quick {
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1;
     color: #444849;
   }
@@ -1436,20 +1710,81 @@ button {
   font-size: 14px;
 }
 
-/* Диапазон 768–561px: выравниваем масштаб qty и кнопки "В корзину" */
+/* Диапазон 768–561px: только отступ между qty и кнопкой */
 @media (max-width: 768px) and (min-width: 561px) {
   .product-card__row {
     gap: 8px;
   }
+}
 
-  .qty {
-    flex: 1 1 0;
-    width: auto;
-    max-width: none;
+/* Мобильные (≤768px): одна высота — grid-строка фиксированной высоты (надёжнее flex + height:100%) */
+@media (max-width: 768px) {
+  .product-card__row {
+    --product-action-h: clamp(40px, 2.8vw, 48px);
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: var(--product-action-h);
+    align-items: stretch;
+    column-gap: clamp(4px, 1.2vw, 8px);
+    row-gap: 0;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    box-sizing: border-box;
   }
 
-  .btn-cart {
-    flex: 1 1 0;
+  .product-card__row > .qty {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+    height: 100% !important;
+    min-height: auto;
+    max-height: none !important;
+    align-self: stretch;
+    box-sizing: border-box;
+    padding: 2px clamp(4px, 1vw, 8px);
+  }
+
+  .product-card__row > .btn-cart {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    width: auto;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    align-self: stretch;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0 clamp(6px, 1vw, 14px);
+    font-size: clamp(12px, 0.95vw, 15px);
+    line-height: 1;
+    box-sizing: border-box;
+    overflow: hidden;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .product-card__row > .qty button {
+    width: clamp(26px, 5.5vw, 36px);
+    height: clamp(26px, 5.5vw, 36px);
+    min-width: clamp(26px, 5.5vw, 36px);
+  }
+
+  .product-card__row > .qty > span {
+    font-size: clamp(12px, 0.85vw, 14px);
+  }
+
+  .catalog-page__grid .product-card__row {
+    grid-template-columns: minmax(0, min(148px, 45%)) minmax(0, 1fr);
+  }
+
+  .catalog-page__grid .product-card__row > .qty {
+    max-width: 148px;
   }
 }
 
@@ -1564,7 +1899,7 @@ button {
   color: #fff;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   transition: background 0.3s, color 0.3s;
 }
 
@@ -1588,7 +1923,7 @@ button {
   color: var(--ink);
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   transition: background 0.3s, color 0.3s;
 }
 
@@ -1656,6 +1991,322 @@ button {
   box-sizing: border-box;
 }
 
+/* Линия под шапкой на странице каталога (как у мега-меню) */
+.page-katalog .site-header {
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.catalog-page {
+  padding: 27px 0 32px;
+}
+
+.catalog-page__head .container {
+  min-width: 0;
+}
+
+.catalog-page__breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Inter", var(--font);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  margin-bottom: 0;
+}
+
+.catalog-page__breadcrumbs a {
+  color: #2f2f2f;
+}
+
+.catalog-page__breadcrumbs-muted {
+  color: #6f7374;
+}
+
+/* 27px от полосы до крошек + 22px строка крошек + 28px = 77px до заголовка */
+.catalog-page__title {
+  margin: 28px 0 20px;
+  font-family: "Inter", var(--font);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+  color: #212121;
+}
+
+.catalog-page__chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.catalog-page__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px 12px;
+  font-family: "Inter", var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  color: #212121;
+  border: 1px solid transparent;
+  background: url("assets/%D0%A4%D0%BE%D0%BD%20%D0%B2%D0%BA%D0%BB%D0%B0%D0%B4%D0%BE%D0%BA.png") center / 100% 100% no-repeat;
+  background-origin: border-box;
+  transition: background-color 0.2s ease, background-image 0.2s ease, border-color 0.2s ease;
+}
+
+.catalog-page__chip.is-active {
+  background-color: #ffffff;
+  background-image: none;
+  border-color: #e1e1e1;
+}
+
+.catalog-page__toolbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.catalog-page__sort {
+  font-family: "Inter", var(--font);
+  font-size: 14px;
+  color: #686c6d;
+}
+
+.catalog-sort {
+  position: relative;
+}
+
+.catalog-sort__trigger {
+  min-width: 0;
+  height: auto;
+  border-radius: 0;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  color: #2f2f2f;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  font-family: "Inter", var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0;
+}
+
+.catalog-sort__trigger:focus-visible {
+  outline: 2px solid var(--accent-hot);
+  outline-offset: 2px;
+}
+
+.catalog-sort__value {
+  flex: 0 1 auto;
+}
+
+.catalog-sort__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.catalog-sort__arrow-img {
+  display: block;
+  width: calc(14px / 1.5);
+  height: calc(6px / 1.5);
+  object-fit: contain;
+}
+
+.catalog-sort__menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  z-index: 5;
+  width: 223px;
+  min-height: 96px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid #ececec;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.catalog-sort__menu li {
+  margin: 0;
+}
+
+.catalog-sort__option {
+  width: 100%;
+  text-align: left;
+  padding: 0 14px;
+  min-height: 32px;
+  height: auto;
+  font-family: "Inter", var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #212121;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.15s ease;
+}
+
+/* Подсветка только у пункта под курсором (без «всегда первый») */
+.catalog-sort.is-open .catalog-sort__menu .catalog-sort__option:hover,
+.catalog-sort.is-open .catalog-sort__menu .catalog-sort__option:focus-visible {
+  color: var(--accent-hot);
+  background: transparent;
+}
+
+.catalog-sort__option:hover,
+.catalog-sort__option:focus-visible {
+  background: transparent;
+}
+
+.catalog-sort.is-open .catalog-sort__trigger {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.catalog-page__grid-wrap {
+  padding-bottom: 8px;
+}
+
+.catalog-page__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.catalog-page__grid .product-card {
+  width: 100%;
+  max-width: 100%;
+}
+
+.catalog-page__grid .product-card__img {
+  height: 220px;
+  min-height: 220px;
+  margin-top: 32px;
+  padding-bottom: 24px;
+}
+
+.catalog-page__grid .product-card__img img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Узкие карточки в сетке каталога (ПК): те же размеры qty и кнопки; без фикс. высоты строки — на десктопе у ряда flex-wrap и ::after */
+.catalog-page__grid .product-card__row {
+  min-width: 0;
+}
+
+@media (min-width: 769px) {
+  .catalog-page__grid .qty {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    max-width: 148px;
+    flex-shrink: 1;
+    box-sizing: border-box;
+    height: clamp(40px, 2.8vw, 48px) !important;
+    min-height: clamp(40px, 2.8vw, 48px) !important;
+    max-height: clamp(40px, 2.8vw, 48px) !important;
+    padding: 2px clamp(4px, 1vw, 8px);
+  }
+
+  .catalog-page__grid .qty button {
+    width: clamp(26px, 5.5vw, 36px);
+    height: clamp(26px, 5.5vw, 36px);
+    min-width: clamp(26px, 5.5vw, 36px);
+  }
+
+  .catalog-page__grid .qty > span {
+    font-size: clamp(12px, 0.85vw, 14px);
+  }
+
+  .catalog-page__grid .btn-cart {
+    flex: 1 1 0;
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0 clamp(6px, 1vw, 14px);
+    height: clamp(40px, 2.8vw, 48px) !important;
+    min-height: clamp(40px, 2.8vw, 48px) !important;
+    max-height: clamp(40px, 2.8vw, 48px) !important;
+    font-size: clamp(12px, 0.95vw, 15px);
+    line-height: 1;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+.catalog-page__more {
+  margin-top: 24px;
+}
+
+@media (max-width: 1620px) {
+  .catalog-page__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1240px) {
+  .catalog-page__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .catalog-page__breadcrumbs {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .catalog-page__title {
+    font-size: 24px;
+    /* 27px + 20px строка крошек + 30px = 77px до заголовка */
+    margin-top: 30px;
+  }
+
+  .catalog-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-page__toolbar {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .catalog-page__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .section-faq {
   padding: 40px 0 48px;
   font-family: "Myriad Pro", "Myriad Web", "Source Sans 3", "Helvetica Neue", Helvetica, Arial,
@@ -1681,7 +2332,7 @@ button {
   max-width: 42em;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: calc(26 / 18);
   letter-spacing: 0;
   color: #1d1a23;
@@ -1810,7 +2461,7 @@ button {
   text-align: left;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: calc(24 / 18);
   letter-spacing: 0;
   color: #1d1a23;
@@ -1825,7 +2476,7 @@ button {
   width: 1.1em;
   height: 1.1em;
   font-size: 22px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   flex-shrink: 0;
   color: inherit;
@@ -1862,7 +2513,7 @@ button {
   transition: padding-bottom 0.5s ease-out;
   font-family: inherit;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: calc(22 / 16);
   letter-spacing: 0;
   color: #828686;
@@ -2032,7 +2683,7 @@ button {
 .footer-brand__company {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 16px;
-  font-weight: 300; 
+  font-weight: 400; 
   line-height: calc(24 / 16);
   letter-spacing: 0;
   margin-bottom: 12px;
@@ -2052,7 +2703,7 @@ button {
   text-decoration: none;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 21px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: calc(32 / 21);
   letter-spacing: 0;
 }
@@ -2073,7 +2724,7 @@ button {
   min-width: 0;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 16px;
-  font-weight: 300; 
+  font-weight: 400; 
   line-height: calc(21 / 16); 
   letter-spacing: 0;
   color: rgba(255, 255, 255, 0.78);
@@ -2138,7 +2789,7 @@ button {
   gap: 6px;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 15px;
-  font-weight: 300; 
+  font-weight: 400; 
   line-height: calc(27 / 15); 
   color: rgba(255, 255, 255, 0.78);
   max-width: none;
@@ -2210,7 +2861,7 @@ button {
   gap: 12px;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 16px;
-  font-weight: 300; 
+  font-weight: 400; 
   line-height: calc(24 / 16);
   letter-spacing: 0;
   color: rgba(255, 255, 255, 0.7);
@@ -2771,7 +3422,7 @@ button {
 
   .hero-main__meta {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.45;
     margin-bottom: 0;
   }
@@ -2804,7 +3455,7 @@ button {
   .hero-main__old {
     order: 2;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.4;
     color: #686c6d;
     text-decoration-line: line-through;
@@ -2888,7 +3539,7 @@ button {
   .hero-side .hero-card__desc {
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.4;
     letter-spacing: 0;
     color: #686c6d;
@@ -3184,7 +3835,7 @@ button {
   .footer-to-top {
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.4;
     letter-spacing: 0;
     color: #f0f0f0;
@@ -3227,7 +3878,7 @@ button {
   .footer-brand__company {
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1;
     color: #f0f0f0;
     margin-bottom: 24px;
@@ -3254,7 +3905,7 @@ button {
     padding-bottom: 10px;
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.2;
     color: #f0f0f0;
     background: rgba(0, 0, 0, 0.18);
@@ -3288,7 +3939,7 @@ button {
     margin-bottom: 24px;
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.78);
     text-align: center;
@@ -3304,7 +3955,7 @@ button {
     margin-bottom: 24px;
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1;
     color: rgba(255, 255, 255, 0.78);
     text-align: center;
@@ -3335,7 +3986,7 @@ button {
     padding-bottom: 20px;
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1;
     color: #f0f0f0;
     text-align: center;
@@ -3472,7 +4123,7 @@ button {
 .mobile-menu__links a {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
   color: #f0f0f0;
@@ -3506,7 +4157,7 @@ button {
   color: #444849 !important;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.2;
 }
 
@@ -3547,7 +4198,7 @@ body.mobile-menu-open::after {
   .btn-quick {
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1;
     color: #444849;
   }

@@ -7,10 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=52" />
+    <link rel="stylesheet" href="style.css?v=73" />
   </head>
   <body>
     <header class="site-header">
@@ -26,12 +26,20 @@
           </div>
         </div>
         <nav class="nav" aria-label="Основное меню">
-          <a class="nav__link nav__link--catalog" href="#catalog">
-            <span class="nav__catalog-btn" aria-hidden="true"
-              ><span class="nav__catalog-eq"></span
-            ></span>
-            Каталог
-          </a>
+          <div class="nav__link nav__link--catalog">
+            <button
+              type="button"
+              id="catalogMegaOpen"
+              class="nav__catalog-btn"
+              aria-label="Открыть каталог"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="catalogMega"
+            >
+              <span class="nav__catalog-eq" aria-hidden="true"></span>
+            </button>
+            <a class="nav__catalog-text" href="#catalog">Каталог</a>
+          </div>
           <a class="nav__link" href="#about">О компании</a>
           <a class="nav__link" href="#materials">Материалы</a>
           <a class="nav__link" href="#contacts">Контакты</a>
@@ -118,6 +126,72 @@
       </div>
     </header>
 
+    <div class="catalog-mega" id="catalogMega" hidden aria-hidden="true">
+      <div class="catalog-mega__backdrop"></div>
+      <div class="container catalog-mega__sheet-wrap">
+        <div class="catalog-mega__sheet" role="dialog" aria-modal="true" aria-labelledby="catalogMegaTitle">
+          <div class="catalog-mega__inner">
+          <h2 id="catalogMegaTitle" class="visually-hidden">Каталог</h2>
+          <div class="catalog-mega__layout">
+            <aside class="catalog-mega__sidebar" aria-label="Разделы каталога">
+              <ul class="catalog-mega__primary">
+                <li><a href="katalog.html">Пластиковые ящики</a></li>
+                <li><a href="#">Пластиковые ящики</a></li>
+                <li><a href="#">Складские лотки</a></li>
+                <li><a href="#">Неразборные пластиковые контейнеры</a></li>
+                <li><a href="#">Пластиковые ящики</a></li>
+                <li><a href="#">Складские лотки</a></li>
+                <li><a href="#">Неразборные пластиковые контейнеры</a></li>
+                <li><a href="#">Пластиковые ящики</a></li>
+                <li><a href="#">Складские лотки</a></li>
+                <li><a href="#">Неразборные пластиковые контейнеры</a></li>
+                <li><a href="#">Пластиковые ящики</a></li>
+                <li><a href="#">Складские лотки</a></li>
+              </ul>
+            </aside>
+            <div class="catalog-mega__main">
+              <div class="catalog-mega__cols">
+                <div class="catalog-mega__col">
+                  <ul class="catalog-mega__sub">
+                    <li><a href="katalog.html">Пищевые пластиковые ящики</a></li>
+                    <li><a href="#">Евроконтейнеры ЕС</a></li>
+                    <li><a href="#">Вкладываемые ящики INSTORE</a></li>
+                    <li><a href="#">Складные ящики</a></li>
+                    <li><a href="#">Контейнеры KLT</a></li>
+                    <li><a href="#">Универсальные ящики</a></li>
+                    <li><a href="#">Комплектующие для ящиков</a></li>
+                  </ul>
+                </div>
+                <div class="catalog-mega__col">
+                  <ul class="catalog-mega__sub">
+                    <li><a href="#">Пищевые пластиковые ящики</a></li>
+                    <li><a href="#">Евроконтейнеры ЕС</a></li>
+                    <li><a href="#">Вкладываемые ящики INSTORE</a></li>
+                    <li><a href="#">Складные ящики</a></li>
+                    <li><a href="#">Контейнеры KLT</a></li>
+                    <li><a href="#">Универсальные ящики</a></li>
+                    <li><a href="#">Комплектующие для ящиков</a></li>
+                  </ul>
+                </div>
+                <div class="catalog-mega__col">
+                  <ul class="catalog-mega__sub">
+                    <li><a href="#">Пищевые пластиковые ящики</a></li>
+                    <li><a href="#">Евроконтейнеры ЕС</a></li>
+                    <li><a href="#">Вкладываемые ящики INSTORE</a></li>
+                    <li><a href="#">Складные ящики</a></li>
+                    <li><a href="#">Контейнеры KLT</a></li>
+                    <li><a href="#">Универсальные ящики</a></li>
+                    <li><a href="#">Комплектующие для ящиков</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true" hidden>
       <div class="mobile-menu__backdrop"></div>
       <div class="mobile-menu__panel">
@@ -134,7 +208,7 @@
           <div class="mobile-menu__title">Категории каталога</div>
           <div class="mobile-menu__catalog">
             <a href="#catalog-trolleys">Транспортные тележки</a>
-            <a href="#catalog-crates">Пластиковые ящики</a>
+            <a href="katalog.html">Пластиковые ящики</a>
             <a href="#catalog-trays">Складские лотки</a>
             <a href="#catalog-containers-sealed">Неразборные пластиковые контейнеры</a>
             <a href="#catalog-containers-hinged">Разборные пластиковые контейнеры</a>
@@ -279,7 +353,7 @@
       <section class="section-cats" id="catalog">
         <div class="container">
           <div class="cat-row" id="catalog-grid">
-            <a class="cat-card" id="catalog-crates" href="#catalog-crates">
+            <a class="cat-card" id="catalog-crates" href="katalog.html">
               <div class="cat-card__box">
                 <div class="cat-card__thumb">
                   <img src="assets/Korobka.webp" width="160" height="160" alt="" loading="lazy" />
@@ -980,6 +1054,7 @@
 
     <script src="cookie-banner.js"></script>
     <script src="mobile-menu.js"></script>
+    <script src="catalog-mega.js"></script>
     <script>
       (function () {
         var row = document.getElementById("catalog-grid");
@@ -991,7 +1066,7 @@
         var expanded = false;
 
         function catalogLimit() {
-          return mqMobile.matches ? 4 : 12;
+          return mqMobile.matches ? 8 : 12;
         }
 
         function sync() {
@@ -1115,6 +1190,29 @@
         });
       })();
 
+      function snapProductScrollToNearestCard(scrollEl) {
+        var cards = scrollEl.querySelectorAll(".product-card");
+        if (!cards.length) return;
+        var maxScroll = Math.max(0, scrollEl.scrollWidth - scrollEl.clientWidth);
+        if (maxScroll <= 1) return;
+        var sl = scrollEl.scrollLeft;
+        var srect = scrollEl.getBoundingClientRect();
+        var best = 0;
+        var bestDist = Infinity;
+        for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          var crect = card.getBoundingClientRect();
+          var target = sl + (crect.left - srect.left);
+          target = Math.max(0, Math.min(maxScroll, target));
+          var d = Math.abs(sl - target);
+          if (d < bestDist) {
+            bestDist = d;
+            best = target;
+          }
+        }
+        scrollEl.scrollLeft = best;
+      }
+
       function initProductCarousel(scrollId, stripId) {
         var scroll = document.getElementById(scrollId);
         var strip = document.getElementById(stripId);
@@ -1211,6 +1309,8 @@
               scroll.releasePointerCapture(e.pointerId);
             } catch (err) {}
             if (dragMoved) {
+              snapProductScrollToNearestCard(scroll);
+              rafUpdate();
               scroll.addEventListener(
                 "click",
                 function stopClick(ev) {
@@ -1272,6 +1372,7 @@
             var newLeft = x - m.thumbW / 2;
             newLeft = Math.max(0, Math.min(m.maxLeft, newLeft));
             scroll.scrollLeft = (newLeft / m.maxLeft) * m.maxScroll;
+            snapProductScrollToNearestCard(scroll);
             rafUpdate();
           }
         }
@@ -1295,6 +1396,8 @@
           try {
             hitTarget.releasePointerCapture(e.pointerId);
           } catch (err) {}
+          snapProductScrollToNearestCard(scroll);
+          rafUpdate();
         }
 
         hitTarget.addEventListener("pointerdown", onPointerDown, { passive: false });
