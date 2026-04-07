@@ -5,8 +5,24 @@
 
   var mq = window.matchMedia("(min-width: 901px)");
 
+  function clearPrimaryActive() {
+    var primary = root.querySelector(".catalog-mega__primary");
+    if (!primary) return;
+    primary.querySelectorAll("li.is-active").forEach(function (li) {
+      li.classList.remove("is-active");
+    });
+  }
+
   function isOpen() {
     return !root.hasAttribute("hidden");
+  }
+
+  function setMegaState(state) {
+    if (state === "sidebar" || !state) {
+      root.setAttribute("data-mega-state", "sidebar");
+    } else {
+      root.setAttribute("data-mega-state", state);
+    }
   }
 
   function setOpen(open) {
@@ -15,11 +31,15 @@
       root.setAttribute("aria-hidden", "false");
       openBtn.setAttribute("aria-expanded", "true");
       document.body.classList.add("catalog-mega-open");
+      setMegaState("sidebar");
+      clearPrimaryActive();
     } else {
       root.setAttribute("hidden", "");
       root.setAttribute("aria-hidden", "true");
       openBtn.setAttribute("aria-expanded", "false");
       document.body.classList.remove("catalog-mega-open");
+      root.removeAttribute("data-mega-state");
+      clearPrimaryActive();
     }
   }
 
@@ -33,6 +53,36 @@
       toggle();
     }
   });
+
+  var backdrop = root.querySelector(".catalog-mega__backdrop");
+  if (backdrop) {
+    backdrop.addEventListener("click", function () {
+      if (mq.matches) {
+        setOpen(false);
+      }
+    });
+    backdrop.addEventListener(
+      "wheel",
+      function (e) {
+        if (!mq.matches) return;
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+        window.scrollBy(0, e.deltaY);
+      },
+      { passive: false }
+    );
+  }
+
+  var headerLogo = document.querySelector(".site-header .brand .logo");
+  if (headerLogo) {
+    headerLogo.addEventListener("click", function (e) {
+      if (mq.matches && isOpen()) {
+        e.preventDefault();
+        setOpen(false);
+      }
+    });
+  }
 
   var catalogLabel = document.querySelector(".nav__link--catalog .nav__catalog-text");
   if (catalogLabel) {
@@ -68,4 +118,29 @@
       }
     });
   });
+
+  var primary = root.querySelector(".catalog-mega__primary");
+  function setPrimaryActive(li) {
+    clearPrimaryActive();
+    if (li) li.classList.add("is-active");
+  }
+  if (primary) {
+    primary.addEventListener("click", function (e) {
+      if (!mq.matches) return;
+      var a = e.target.closest("a[data-mega-panel]");
+      if (!a) return;
+      e.preventDefault();
+      var panel = a.getAttribute("data-mega-panel");
+      if (panel === "full") {
+        clearPrimaryActive();
+        setMegaState("plastic-full");
+      } else if (panel === "compact") {
+        clearPrimaryActive();
+        setMegaState("plastic-compact");
+      } else if (panel === "empty") {
+        setMegaState("empty");
+        setPrimaryActive(a.closest("li"));
+      }
+    });
+  }
 })();
