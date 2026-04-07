@@ -3402,11 +3402,36 @@ body.catalog-mega-open {
 
   .header-tools__icon {
     width: 34px;
+    position: relative;
   }
 
   .header-tools__phone {
-    width: 34px;
-    height: 34px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin-right: 0;
+    border-radius: 50%;
+    background: #f2f2f2;
+    color: #212121;
+    line-height: 0;
+    font-size: 0;
+  }
+
+  .header-tools__icon svg,
+  .header-tools__icon img.header-tools__icon-img--mobile {
+    display: none;
+  }
+
+  .header-tools__icon::before {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    background: url("assets/phone-icon-mobile.png") center / contain no-repeat;
   }
 
   /* Эксперимент: без кружка у «Каталог» на узких ширинах */
@@ -3709,6 +3734,28 @@ body.catalog-mega-open {
     flex-shrink: 0;
   }
 
+  /* На 769–900px возвращаем обычный поиск (лупу) */
+  .header-tools__phone {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+  }
+
+  .header-tools__icon {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+  }
+
+  .header-tools__icon::before {
+    content: none;
+  }
+
+  .header-tools__icon svg,
+  .header-tools__icon img.header-tools__icon-img--mobile {
+    display: block;
+  }
+
   .nav .nav__link:not(.nav__link--catalog) {
     display: inline-flex;
   }
@@ -3780,10 +3827,7 @@ body.catalog-mega-open {
   }
 
   .header-tools__icon img.header-tools__icon-img--mobile {
-    display: block;
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+    display: none;
   }
 
   .header-tools__phone-icon img.header-tools__phone-img--mobile {
@@ -3806,10 +3850,24 @@ body.catalog-mega-open {
   }
 
   .header-tools__icon {
+    display: none;
     width: 40px;
     height: 40px;
+    position: relative;
     background: #f2f2f2;
     color: #444849;
+  }
+
+  .header-tools__icon svg {
+    display: none;
+  }
+
+  .header-tools__icon::before {
+    content: "";
+    display: block;
+    width: 13px;
+    height: 13px;
+    background: url("assets/phone-icon-mobile.png") center / contain no-repeat;
   }
 
   .header-tools__pill {
