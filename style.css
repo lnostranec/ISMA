@@ -581,11 +581,15 @@ body.catalog-mega-open {
 }
 
 .nav__link:hover {
-  color: var(--accent-red);
+  color: var(--accent-hot);
 }
 
 .nav__link--catalog:hover .nav__catalog-text {
-  color: var(--accent-red);
+  color: var(--accent-hot);
+}
+
+.nav__link--catalog:hover .nav__catalog-btn {
+  background: var(--accent-hot);
 }
 .header-tools {
   display: flex;

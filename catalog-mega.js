@@ -31,7 +31,7 @@
       root.setAttribute("aria-hidden", "false");
       openBtn.setAttribute("aria-expanded", "true");
       document.body.classList.add("catalog-mega-open");
-      setMegaState("sidebar");
+      setMegaState("plastic-full");
       clearPrimaryActive();
     } else {
       root.setAttribute("hidden", "");
