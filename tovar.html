@@ -215,32 +215,57 @@
         </h1>
 
         <div class="product-detail__top">
-          <div class="product-detail__gallery">
-            <div class="product-detail__figure">
-              <div class="product-detail__badge-wrap">
-                <span class="badge badge--new">Новинка</span>
+          <div class="product-detail__left">
+            <div class="product-detail__gallery">
+              <div class="product-detail__figure">
+                <div class="product-detail__badge-wrap">
+                  <span class="badge badge--new">Новинка</span>
+                </div>
+                <button type="button" class="product-detail__zoom" aria-label="Увеличить фото">
+                  <img
+                    class="product-detail__main-img"
+                    src="assets/Tazik.webp"
+                    width="354"
+                    height="284"
+                    alt="Вкладываемый ящик 600×400×235"
+                  />
+                </button>
               </div>
-              <button type="button" class="product-detail__zoom" aria-label="Увеличить фото">
-                <img
-                  class="product-detail__main-img"
-                  src="assets/Tazik.webp"
-                  width="354"
-                  height="284"
-                  alt="Вкладываемый ящик 600×400×235"
-                />
-              </button>
+              <div class="product-detail__thumbs" role="list">
+                <button type="button" class="product-detail__thumb is-active" aria-current="true" aria-label="Вид 1">
+                  <img src="assets/Tazik.webp" width="64" height="52" alt="" />
+                </button>
+                <button type="button" class="product-detail__thumb" aria-label="Вид 2">
+                  <img src="assets/Tazik.webp" width="64" height="52" alt="" />
+                </button>
+                <button type="button" class="product-detail__thumb" aria-label="Вид 3">
+                  <img src="assets/Tazik.webp" width="64" height="52" alt="" />
+                </button>
+                <button type="button" class="product-detail__thumb" aria-label="Вид 4">
+                  <img src="assets/Tazik.webp" width="64" height="52" alt="" />
+                </button>
+              </div>
             </div>
-            <div class="product-detail__thumbs" role="list">
-              <button type="button" class="product-detail__thumb is-active" aria-current="true" aria-label="Вид 1">
-                <img src="assets/Tazik.webp" width="81" height="65" alt="" />
-              </button>
-              <button type="button" class="product-detail__thumb" aria-label="Вид 2">
-                <img src="assets/Tazik.webp" width="81" height="65" alt="" />
-              </button>
-              <button type="button" class="product-detail__thumb" aria-label="Вид 3">
-                <img src="assets/Tazik.webp" width="81" height="65" alt="" />
-              </button>
-            </div>
+            <aside class="product-detail__buy" aria-label="Заказ">
+              <div class="product-detail__buy-inner">
+                <div class="product-detail__order-sku">Арт.: 2.355F.65 KV 5328</div>
+                <div class="product-detail__order-spacer-top" aria-hidden="true"></div>
+                <div class="product-detail__order-price">4 053 ₽</div>
+                <div class="product-detail__order-row">
+                  <div class="qty">
+                    <button type="button" aria-label="Уменьшить"><span class="qty__btn-text qty__btn-text--minus" aria-hidden="true"></span></button>
+                    <span>1</span>
+                    <button type="button" aria-label="Увеличить"><span class="qty__btn-text qty__btn-text--plus" aria-hidden="true"></span></button>
+                  </div>
+                  <button type="button" class="btn-cart">В корзину</button>
+                </div>
+                <div class="product-detail__order-bottom">
+                  <div class="product-detail__order-spacer" aria-hidden="true"></div>
+                  <div class="product-detail__order-line" aria-hidden="true"></div>
+                  <button type="button" class="product-detail__order-quick">Быстрый заказ</button>
+                </div>
+              </div>
+            </aside>
           </div>
 
           <div class="product-detail__middle">
@@ -352,27 +377,6 @@
               </p>
             </div>
           </div>
-
-          <aside class="product-detail__buy" aria-label="Заказ">
-            <div class="product-detail__buy-inner">
-              <div class="product-detail__order-sku">Арт.: 2.355F.65 KV 5328</div>
-              <div class="product-detail__order-spacer-top" aria-hidden="true"></div>
-              <div class="product-detail__order-price">4 053 ₽</div>
-              <div class="product-detail__order-row">
-                <div class="qty">
-                  <button type="button" aria-label="Уменьшить"><span class="qty__btn-text qty__btn-text--minus" aria-hidden="true"></span></button>
-                  <span>1</span>
-                  <button type="button" aria-label="Увеличить"><span class="qty__btn-text qty__btn-text--plus" aria-hidden="true"></span></button>
-                </div>
-                <button type="button" class="btn-cart">В корзину</button>
-              </div>
-              <div class="product-detail__order-bottom">
-                <div class="product-detail__order-spacer" aria-hidden="true"></div>
-                <div class="product-detail__order-line" aria-hidden="true"></div>
-                <button type="button" class="product-detail__order-quick">Быстрый заказ</button>
-              </div>
-            </div>
-          </aside>
         </div>
       </div>
     </main>
@@ -383,7 +387,7 @@
           <div class="site-footer__head-inner">
             <div class="site-footer__head-top">
               <a href="index.html" class="logo" aria-label="ИСМА на главную">
-                <img class="logo__img logo__img--footer" src="assets/logofooter.png" alt="ИСМА" />
+                <img class="logo__img logo__img--footer" src="assets/исма.svg" alt="ИСМА" />
               </a>
               <a class="footer-to-top" href="#top">Наверх</a>
             </div>
